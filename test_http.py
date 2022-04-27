@@ -20,13 +20,30 @@ class MyTestCase(unittest.TestCase):
         result = json.loads(self.app.get('/authors').data)
         self.assertTrue(result['message'] == "success")
     
-    def test_modify_book(self):
+    def test_modify_book_no_data(self):
         with self.assertRaises(Exception) as cm:
             result = json.loads(self.app.put('/books/1').data)
+    
+    def test_bf_price(self):
+        result = json.loads(self.app.get('/books/bf/1').data)
+        price = int(result['data'][0]['price'])
+        bf_price = int(result['data'][0]['black_friday_price'])
+        self.assertGreater(price, bf_price)
+        self.assertEqual(price * 0.6, bf_price)
+    
+    def test_price_almost_equal(self):
+        result = json.loads(self.app.get('/books/bf/1').data)
+        price = int(result['data'][0]['price'])
+        bf_price = price * 0.6000000001 # maybe some floating point precision could cause this ?
+
+        self.assertAlmostEqual(bf_price, price * 0.6)
+        
 
     
 test = MyTestCase()
 test.setUp()
 test.test_all_books()
 test.test_all_authors()
-test.test_modify_book()
+test.test_modify_book_no_data()
+test.test_bf_price()
+test.test_price_almost_equal()
