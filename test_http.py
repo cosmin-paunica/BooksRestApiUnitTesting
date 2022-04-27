@@ -24,7 +24,7 @@ class MyTestCase(unittest.TestCase):
         with self.assertRaises(Exception) as cm:
             result = json.loads(self.app.put('/books/1').data)
 
-        
+    
 test = MyTestCase()
 test.setUp()
 test.test_all_books()
