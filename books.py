@@ -61,12 +61,11 @@ def modify_book(id):
         new_genre = data['genre']
         new_publish_date = data['publish_date']
         new_price = data['price']
-        new_black_friday_price = data['black_friday_price']
     except:
         conn.close()
         raise Exception('invalid data')
     
-    curr = conn.execute('UPDATE books SET title = ?, genre = ?, publish_date = ?, price = ?, black_friday_price = ? WHERE id = ?', (new_title, new_genre, new_publish_date, new_price, new_black_friday_price, id))
+    curr = conn.execute('UPDATE books SET title = ?, genre = ?, publish_date = ?, price = ?, black_friday_price = ? WHERE id = ?', (new_title, new_genre, new_publish_date, new_price, new_price * 0.6, id))
     if curr.rowcount == 0:
         return {"message": f"book with id {id} does not exist"}
     conn.commit()
