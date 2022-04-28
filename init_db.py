@@ -8,12 +8,12 @@ with open('schema.sql') as f:
 cur = connection.cursor()
 
 books_to_insert = [
-    ('1984', 'Dystopian', '1949-06-08'),
-    ('Ion', 'Roman realist', '1920-11-20'),
-    ('Animal Farm', 'Dystopian', '1945-08-17')
+    ('1984', 'Dystopian', '1949-06-08', 10, 6),
+    ('Ion', 'Roman realist', '1920-11-20', 5, 4),
+    ('Animal Farm', 'Dystopian', '1945-08-17', 15, 8)
 ]
 
-cur.executemany("INSERT INTO books(title, genre, publish_date) VALUES (?, ?, ?)", books_to_insert)
+cur.executemany("INSERT INTO books(title, genre, publish_date, price, black_friday_price) VALUES (?, ?, ?, ?, ?)", books_to_insert)
 
 authors_to_insert = [
     ('George Orwell',),
