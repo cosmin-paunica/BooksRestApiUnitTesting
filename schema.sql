@@ -6,6 +6,8 @@ CREATE TABLE books (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     genre TEXT NOT NULL,
+    price INTEGER NOT NULL,
+    black_friday_price INTEGER NOT NULL,
     publish_date DATE NOT NULL
 );
 
