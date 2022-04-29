@@ -34,6 +34,7 @@ class FunctionalTesting(unittest.TestCase):
         id = 7
         result = self.app.delete(f'/books/{id}')
         self.assertEqual(json.loads(result.data)['message'], f"book with id {id} does not exist")
+        self.assertEqual(1, 2)
 
 
 import init_db
